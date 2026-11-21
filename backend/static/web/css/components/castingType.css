@@ -1,0 +1,37 @@
+.casting-type .profile {
+	border-width: 0;
+}
+
+.casting-type .nav-item a{
+	font-size: 30px;
+}
+
+.casting-type .card__title {
+	text-align: center;
+}
+
+.casting-type .card__author {
+	background-color: #fff;
+	width: 60%;
+	margin: auto;
+	border-radius: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	
+	text-align: center;
+}
+
+.casting-type .card__author a {
+	color: #FFFFFF!important;
+}
+
+
+.casting-type .name {
+	color: #FFFFFF;
+	text-align: center;
+	    margin-top: 20px;
+}
+
+.casting-type-container:hover {
+	cursor: pointer;
+}

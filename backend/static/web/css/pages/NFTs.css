@@ -1,0 +1,7 @@
+.card__author a {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
+	flex: 1;
+}

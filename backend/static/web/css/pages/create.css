@@ -1,0 +1,28 @@
+.profile {
+	border-width: 0;
+}
+
+.profile .nav-item {
+	display: flex;
+}
+
+.profile  .nav-item a {
+	font-size: 30px;
+	color: #FFFFFF;
+}
+
+.profile .arrow {
+	width: 40px;
+}
+
+.profile__tabs li {
+	margin-right: 0;
+}
+
+.profile__tabs a:before {
+	background-color: transparent;
+}
+
+.profile  .nav-item .active:hover{
+	cursor: pointer;
+}

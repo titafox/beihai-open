@@ -1,0 +1,145 @@
+::-webkit-scrollbar{
+	display: none;
+}
+.author__text {
+	overflow: auto;
+}
+
+.author__follow {
+	background-color: #6164ff;
+}
+
+.author--page .author__avatar img {
+	border-width: 0;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+}
+
+.card__author a {
+	color: #bdbdbd !important;
+}
+
+.card__info {
+	justify-content: flex-end;
+}
+
+.card__info button {
+	margin-left: 20px;
+}
+
+.card__likes:hover svg {
+	fill: #6164ff;
+}
+
+
+.author__name {
+	justify-content: space-between;
+	align-items: flex-start;
+	display: flex;
+}
+
+.author__name input {
+	width: 80%;
+	padding: 0 40px 0 15px;
+	height: 30px;
+	border: none;
+	background-color: #222227;
+	border-radius: 10px;
+	color: #bdbdbd;
+	font-size: 14px;
+	font-family: 'Inter', sans-serif;
+	font-weight: 400;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	word-wrap: break-word;
+	cursor: default;
+	position: relative;
+	z-index: 1;
+	transition: 0s;
+}
+
+.author__text-container {
+	justify-content: space-between;
+	align-items: flex-start;
+	display: flex;
+	width: 100%;
+}
+
+.author__text {
+	padding-right: 0 !important;
+	min-height: 145px;
+	text-overflow: unset;
+	display: block;
+}
+
+.edit-img {
+	position: absolute;
+	z-index: 4;
+	right: 10%;
+	top: 180px;
+}
+
+.edit-img:hover {
+	cursor: pointer;
+}
+
+@media (min-width: 768px) {
+	.edit-img {
+		top: 280px;
+	}
+}
+
+	
+.card__likes svg{
+	width: 24px;
+}
+
+
+.edit .profile {
+	border-width: 0;
+}
+
+.edit .nav-link:hover {
+	cursor: pointer;
+}
+
+.edit .profile .nav-item {
+	display: flex;
+}
+
+.edit .profile  .nav-item a {
+	font-size: 30px;
+	color: #FFFFFF;
+}
+
+.edit .profile .arrow {
+	width: 40px;
+}
+
+.edit .profile__tabs li {
+	margin-right: 0;
+}
+
+.invite-info {
+	white-space:nowrap;
+	overflow-x:auto;
+	border-radius: 10px 0px 0px 10px;
+	background: #232227;
+	padding: 10px 0 10px 10px;
+}
+
+
+
+.copy-btn {
+	width:150px;
+	border-radius: 0px 10px 10px 0px;
+	padding: 10px;
+	background: linear-gradient(180deg, #5F61F6 0%, #313173 100%);
+	text-align: center;
+}
+
+.copy-btn:hover{
+	cursor: pointer;
+}

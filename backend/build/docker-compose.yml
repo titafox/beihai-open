@@ -1,0 +1,108 @@
+version: '3.1'
+services:
+  portainer:
+    image: portainer/portainer:latest
+    container_name: portainer
+    ports:
+      - "127.0.0.1:9090:9000"   # 仅本机，经 SSH 隧道访问
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/root/docker/portainer/data:/data"
+    environment:
+      TZ: Asia/Shanghai
+    restart: always
+  php:
+    image: php7.4:latest
+    container_name: php
+    ports:
+      - "9000:9000"
+    volumes:
+      - /root/docker/php:/usr/local/etc/php
+      - ${NGINX_DIR}/html:/usr/share/nginx/html
+    restart: always
+  nginx:
+    image: nginx:${NGINX_VERSION}
+    container_name: nginx
+    ports:
+      - 80:80
+      - 443:443
+    #定义挂载点
+    volumes:
+      - ${NGINX_DIR}/html:/usr/share/nginx/html
+      - ${NGINX_DIR}/conf/nginx.conf:/etc/nginx/nginx.conf
+      - ${NGINX_DIR}/conf.d:/etc/nginx/conf.d
+      - ${NGINX_DIR}/logs:/var/log/nginx
+      - ${CERTBOT_DIR}/conf:/etc/letsencrypt
+      - ${CERTBOT_DIR}/www:/var/www/certbot
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    restart: always
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ${CERTBOT_DIR}/conf:/etc/letsencrypt
+      - ${CERTBOT_DIR}/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    restart: always
+
+  mysql:
+    image: mysql:${MYSQL_VERSION}
+    container_name: mysql
+    ports:
+      - 127.0.0.1:${REAL_MYSQL_PORT}:3306   # 不要暴露到公网
+    volumes:
+      - ${MYSQL_DIR}/data:/var/lib/mysql
+      - ${MYSQL_DIR}/my.cnf:/etc/mysql/my.cnf
+      - ${MYSQL_DIR}/logs:/logs
+      - ${MYSQL_DIR}/mysql-files:/var/lib/mysql-files
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      #MYSQL_ROOT_HOST: ${MYSQL_ROOT_HOST}
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200m"
+        max-file: "3"
+    restart: always
+
+  redis:
+    image: redis:${REDIS_VERSION}
+    container_name: redis
+    ports:
+      - 127.0.0.1:${REAL_REDIS_PORT}:6379   # Redis 无密码，绝不能暴露到公网
+    volumes:
+      - ${REDIS_DIR}/data:/data
+      - ${REDIS_DIR}/redis.conf:/etc/redis/redis.conf
+      - ${REDIS_DIR}/logs:/logs
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200m"
+        max-file: "3"
+    restart: always
+    command: ["redis-server", "/etc/redis/redis.conf"]
+
+  coltstail-server:
+    image: coltstail-server:latest
+    container_name: coltstail-server
+    ports:
+      - 8000:8000
+    volumes:
+      - /root/apache-tomcat-8.5.64/webapps:/usr/local/tomcat/webapps
+    env_file:
+      - ./.env   # 参考 backend/.env.example
+    environment:
+      TZ: Asia/Shanghai
+      #定义挂载点
+    restart: always
+
+  java-tomcat:
+      image: java-tomcat:latest
+      container_name: java-tomact
+      ports:
+        - 127.0.0.1:8080:8080   # 汇付 CFCA 加签/验签服务，暴露到公网可被用来伪造签名
+      volumes:
+        - /root/apache-tomcat-8.5.64/webapps:/usr/local/tomcat/webapps
+        #定义挂载点
+      restart: always

@@ -1,0 +1,422 @@
+* {
+	user-select: none;
+	
+}
+
+html {
+	font-size: 62.5%;
+}
+
+#painting-canvas {
+	/* border: 1px solid #16151a; */
+	background-color: transparent;
+}
+
+#preview-canvas {
+	background-color: #FFFFFF;
+}
+
+.preview-title {
+	width: 481px;
+	height: 39px;
+	background: #21242D;
+	line-height: 21px;
+	color: #FFFFFF;
+	padding: 7px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.painting-panel {
+	width: 480px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.tools-title,
+.layers-title {
+	width: 237px;
+	height: 39px;
+	background: #21242D;
+	opacity: 1;
+	color: #FFFFFF;
+	padding: 7px;
+	margin: 0;
+	display: inline-block;
+}
+
+.tools-container {
+	width: 237px;
+	display: flex;
+}
+
+.tools-icon {
+	padding-top: 40px;
+	width: 26px;
+	background: #979DAF;
+	padding-left: 2px;
+	border-radius: 0px 0px 0px 4px;
+	/* border: 1px solid #CECED0; */
+}
+
+.tool-icon {
+	position: relative;
+	margin-bottom: 15px;
+}
+
+.tool-icon svg {
+	fill: #FFFFFF;
+	transition: fill .5s ease;
+}
+
+.tool-icon:hover {
+	cursor: pointer;
+}
+
+.icon-active::after {
+	content: '';
+	position: absolute;
+	width: 4px;
+	height: 25px;
+	background-color: #6264FF;
+	right: -4px;
+	top: -5px;
+	z-index: 2;
+}
+
+
+
+.icon-active svg {
+	fill: #6264FF;
+}
+
+.hu-color-picker {
+	width: 214px !important;
+	border-radius: 0px 0px 4px 0px;
+	position: relative;
+}
+
+
+
+.layers-container {
+	width: 239px;
+	height: 322px;
+	background: #FFFFFF;
+	box-shadow: -10px 9px 21px rgba(128, 152, 213, 0.07);
+	opacity: 1;
+	border-radius: 0px 0px 4px 4px;
+	padding-top: 3px;
+}
+
+.layer-add {
+	width: 111px;
+	height: 21px;
+	background: #7D7D7D;
+	opacity: 1;
+	border-radius: 2px;
+	color: #FFFFFF;
+	font-size: 12px;
+	margin-left: 12px;
+	margin-bottom: 3px;
+}
+
+.layer-add:hover {
+	cursor: pointer;
+}
+
+.layers {
+	padding: 0 7px;
+	height: 288px;
+	overflow: auto;
+	/* border-top: 1px solid #cfcfcf; */
+}
+
+.layer:first-child {
+	/* border-top: 1px solid #cfcfcf; */
+}
+
+.layer-head,
+.layer-body .image {
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid #cfcfcf;
+	position: relative;
+}
+
+.layer-body .image.active {
+	/* border: 1px solid #6264FF;
+     */
+	color: #6264FF;
+}
+
+.layer-body .image.active svg {
+	fill: #6264FF;
+}
+
+.layer-head {
+	padding-left: 14px;
+}
+
+.layer-head:hover,
+.layer-body .image:hover {
+	cursor: pointer;
+}
+
+.layer.active .layer-head {
+	/* color: #6264FF; */
+	transition: color .5s ease;
+}
+
+.layer-head:hover .layer-tools,
+.image:hover .image-tools {
+	display: block !important;
+	align-items: center;
+
+}
+
+.layer-head:hover,
+.image:hover {
+	background-color: #cfcfcf8a;
+}
+
+.layer.active .layer-title::before {
+	top: 4px;
+	border-left: 10px solid transparent;
+	border-bottom: 10px solid #7d7d7d;
+	border-top: 0px solid #7d7d7d;
+	border-right: 0px solid transparent;
+	transform: rotate(45deg);
+}
+
+.layer.chosen .layer-head {
+	box-shadow: 3px 3px 3px #6264FF;
+	color: #6264FF;
+}
+
+.layer.chosen .layer-title::before {
+	border-bottom: 10px solid #6264FF;
+	border-top: 0px solid #6264FF;
+}
+
+.layer.chosen svg {
+	/* fill: #6264FF; */
+}
+
+/* .layer-title {
+    flex: 2;
+  } */
+
+.layer-title::before {
+	content: '';
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	left: 0;
+	top: 6px;
+	border-left: 10px solid transparent;
+	border-bottom: 10px solid #7D7D7D;
+	border-top: 0px solid #7D7D7D;
+	border-right: 0px solid transparent;
+	transform: rotate(-45deg);
+	transition: transform .5s ease;
+}
+
+/* .layer-tools {
+    flex: 1;
+  } */
+
+.image-title {
+	margin-left: 14px;
+	display: flex;
+	align-items: center;
+}
+
+.image-title:hover {
+	cursor: pointer;
+}
+
+.image-title .empty {
+	height: 13px;
+	width: 13px;
+}
+
+/* .toast {
+    background-color: #000000;
+    width: 45%;
+    color: #FFFFFF;
+    border-radius: 4px;
+    padding: 10px;
+    position: fixed;
+    top: 50%;
+    left: 35%;
+    z-index: 2;
+    padding: 30px 50px;
+    border: 1px solid #000;
+  }
+ */
+.toast-icon {
+	width: 20px;
+}
+
+.toast-header .close {
+	float: right;
+	color: #FFFFFF;
+}
+
+.toast-layer {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	background-color: #000000c7;
+}
+
+.preview-toast {
+	top: 5%;
+	width: auto;
+	left: 15%;
+	height: auto;
+	background-color: transparent;
+	border-color: transparent;
+	color: #FFFFFF;
+	opacity: 0;
+	display: flex;
+	border-radius: 10px;
+	padding: 50px 20px;
+	position: fixed;
+	z-index: -1;
+
+	flex-direction: row-reverse;
+}
+
+.preview-toast .toast-header {
+	margin-bottom: 0;
+}
+
+.preview-toast .close {
+	font-size: 40px;
+	border: 3px solid #FFFFFF;
+	border-radius: 100%;
+	width: 49px;
+	height: 49px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.name_input {
+	width: 100%;
+	padding: 0 10px;
+	height: 35px;
+	border: none;
+	background-color: transparent;
+	color: #bdbdbd;
+	font-size: 14px;
+	font-family: Inter, sans-serif;
+	font-weight: 400;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	word-wrap: break-word;
+	cursor: default;
+	position: relative;
+	z-index: 1;
+	transition: 0s;
+	border: 1px solid #cfcfcf;
+	border-radius: 4px;
+}
+
+.toast .primary {
+	background-color: #6264FF;
+	color: #FFFFFF;
+	padding: 5px 10px;
+	border-radius: 4px;
+	margin-top: 20px;
+	float: right;
+}
+
+.icon-group {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #21242D;
+	width: 270px;
+	margin: auto;
+	border-radius: 20px;
+	margin-top: 10px;
+}
+
+.icon-layers {
+	display: flex;
+	justify-content: space-between;
+}
+
+.icon-layers .icon-container {
+	position: relative;
+}
+
+
+
+.icon-group .icon-container {
+	position: relative;
+	margin: 5px 20px 10px 20px;
+}
+
+.icon-group .icon-container:nth-child(2n)::after {
+	content: '';
+	position: absolute;
+	width: 1px;
+	height: 18px;
+	background-color: #FFFFFF;
+	top: 5px;
+	right: -20px;
+}
+
+.icon-group .icon-container:nth-child(2n) {
+	margin-left: 5px;
+}
+
+.icon-layers .icon-container:hover,
+.icon-group .icon-container:hover {
+	cursor: pointer;
+}
+
+.icon-layers .icon-container:hover .alt,
+.icon-group .icon-container:hover .alt {
+	display: block;
+}
+
+.icon-layers .icon-container .alt,
+.icon-group .icon-container .alt {
+	position: absolute;
+	background: #21242D;
+	opacity: 1;
+	border-radius: 4px;
+	display: none;
+	top: -40px;
+	left: -10px;
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 14px;
+	padding: 5px 8px;
+	min-width: 100px;
+	width: auto;
+	white-space: nowrap;
+}
+
+.uploadInput {
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	left: -20px;
+	top: -10px;
+	z-index: 1;
+	opacity: 0;
+	display: none;
+}
+
+.uploadInput:hover {
+	cursor: pointer;
+}

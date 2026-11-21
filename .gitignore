@@ -1,0 +1,32 @@
+node_modules/
+vendor/
+runtime/
+unpackage/
+*.log
+.DS_Store
+*.exe
+*.bin
+binlog.sql
+
+# 配置与密钥：一律不入库
+.env
+*.env
+!*.env.example
+*.pem
+*.key
+*.crt
+*.cer
+*.pfx
+*.p12
+*.keystore
+*.jks
+
+# 构建产物与临时文件
+backend/build/coltstail-server
+backend/tmp/
+admin/public/uploads/*
+!admin/public/uploads/.htaccess
+!admin/public/uploads/.gitkeep
+
+# 本地工具目录
+.claude/

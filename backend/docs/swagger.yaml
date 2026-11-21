@@ -1,0 +1,730 @@
+basePath: /api/v1
+definitions:
+  controllers.OrderForm:
+    properties:
+      id:
+        type: integer
+      num:
+        type: integer
+    required:
+    - id
+    - num
+    type: object
+  req.Authentication:
+    properties:
+      id_card:
+        type: string
+      name:
+        type: string
+    type: object
+  req.Login:
+    properties:
+      code:
+        type: string
+      invitation:
+        type: string
+      phone:
+        type: string
+    required:
+    - code
+    - phone
+    type: object
+  req.MarketBuyTheNFT:
+    properties:
+      id:
+        type: integer
+    required:
+    - id
+    type: object
+  req.MarketOffTheNFT:
+    properties:
+      id:
+        type: integer
+    required:
+    - id
+    type: object
+  req.MarketOnTheNFT:
+    properties:
+      id:
+        type: integer
+      price:
+        type: number
+    required:
+    - id
+    - price
+    type: object
+  req.Send:
+    properties:
+      phone:
+        type: string
+    required:
+    - phone
+    type: object
+  req.StartComposite:
+    properties:
+      ids:
+        items:
+          type: integer
+        type: array
+      wid:
+        type: integer
+    type: object
+  req.StartCompositeData:
+    properties:
+      composite_id:
+        type: integer
+      data:
+        items:
+          $ref: '#/definitions/req.StartComposite'
+        type: array
+    type: object
+  req.UpdateAccountInfo:
+    properties:
+      avatar:
+        type: string
+      desc:
+        type: string
+      nickname:
+        type: string
+    type: object
+host: localhost:8000
+info:
+  contact: {}
+  description: Coltstail APIs
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Coltstail APIs
+  version: "1.0"
+paths:
+  /account/authentication:
+    post:
+      consumes:
+      - application/json
+      description: 实名认证
+      parameters:
+      - description: 输入参数
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/req.Authentication'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 实名认证
+      tags:
+      - 用户
+  /account/info:
+    get:
+      consumes:
+      - application/json
+      description: 获取用户信息
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 获取用户信息
+      tags:
+      - 用户
+  /account/invite/list:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 分页
+        in: query
+        name: page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 我的邀请
+      tags:
+      - 二期接口列表
+  /account/invite/top:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 排行邀请
+      tags:
+      - 二期接口列表
+  /account/nfts:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 分页
+        in: query
+        name: page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 已购藏品
+      tags:
+      - 二期接口列表
+  /account/nfts/sells:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: page
+        in: query
+        name: page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 我的寄售
+      tags:
+      - 二期接口列表
+  /account/nfts/series:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: query
+        name: id
+        required: true
+        type: integer
+      - description: 分页
+        in: query
+        name: page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 已购藏品合集内页
+      tags:
+      - 二期接口列表
+  /account/smsLogin:
+    post:
+      consumes:
+      - application/json
+      description: 短信登录
+      parameters:
+      - description: 输入参数
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/req.Login'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 短信登录
+      tags:
+      - 用户
+  /account/smsLogin/code:
+    post:
+      consumes:
+      - application/json
+      description: 获取登录验证码
+      parameters:
+      - description: 输入参数
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/req.Send'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 获取登录验证码
+      tags:
+      - 用户
+  /account/update:
+    post:
+      consumes:
+      - application/json
+      description: 更新个人信息
+      parameters:
+      - description: 查询参数
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/req.UpdateAccountInfo'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 更新个人信息
+      tags:
+      - 用户
+  /app/version:
+    get:
+      consumes:
+      - application/json
+      description: APP版本更新
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: APP版本更新
+      tags:
+      - 版本更新
+  /banner/list:
+    get:
+      consumes:
+      - application/json
+      description: 首页Banner轮播图
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 首页Banner轮播图
+      tags:
+      - Banner
+  /market:
+    get:
+      consumes:
+      - application/json
+      description: typ:目前默认1,wid:接口返回series对象里的id,sort:默认最新上架，sort=time_desc 最新上架；price_desc
+        价格高到低；price_asc 底到高
+      parameters:
+      - in: query
+        name: keyword
+        type: string
+      - in: query
+        name: page
+        type: integer
+      - in: query
+        name: sort
+        type: string
+      - in: query
+        name: typ
+        type: integer
+      - in: query
+        name: wid
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: market
+      tags:
+      - 二期接口列表
+  /market/detail:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 藏品id
+        in: query
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 藏品详情
+      tags:
+      - 二期接口列表
+  /market/nft/buy:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 输入参数
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/req.MarketBuyTheNFT'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 下单
+      tags:
+      - 二期接口列表
+  /market/nft/off:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 输入参数
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/req.MarketOffTheNFT'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 下架
+      tags:
+      - 二期接口列表
+  /market/nft/on:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 输入参数
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/req.MarketOnTheNFT'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 寄售
+      tags:
+      - 二期接口列表
+  /market/nfts/circulating:
+    get:
+      consumes:
+      - application/json
+      description: sort = price ,按价格排序，sort=no 按编号排序 默认价格排序
+      parameters:
+      - description: wid
+        in: query
+        name: wid
+        required: true
+        type: integer
+      - description: 排序
+        in: query
+        name: sort
+        type: string
+      - description: 分页
+        in: query
+        name: page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 单个作品流通列表
+      tags:
+      - 二期接口列表
+  /nft/composite/list:
+    get:
+      consumes:
+      - application/json
+      description: 合成活动列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 合成活动列表
+      tags:
+      - 合成
+  /nft/composite/material:
+    get:
+      consumes:
+      - application/json
+      description: 获取合成材料
+      parameters:
+      - in: query
+        name: id
+        type: integer
+      - in: query
+        name: page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 获取合成材料
+      tags:
+      - 合成
+  /nft/composite/start:
+    post:
+      consumes:
+      - application/json
+      description: 获取合成材料
+      parameters:
+      - description: 输入参数
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/req.StartCompositeData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 合成
+      tags:
+      - 合成
+  /notice:
+    get:
+      consumes:
+      - application/json
+      description: 公告小喇叭
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 公告小喇叭
+      tags:
+      - 公告
+  /notice/detail/{id}:
+    get:
+      consumes:
+      - application/json
+      description: 公告详情
+      parameters:
+      - description: 公告id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 公告详情
+      tags:
+      - 公告
+  /notice/type:
+    get:
+      consumes:
+      - application/json
+      description: 获取公告类型
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 获取公告类型
+      tags:
+      - 公告
+  /notice/type/all:
+    get:
+      consumes:
+      - application/json
+      description: 综合公告
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 综合公告
+      tags:
+      - 公告
+  /notice/type/list/{nid}:
+    get:
+      consumes:
+      - application/json
+      description: 某个分类下所有公告
+      parameters:
+      - description: 分类id
+        in: path
+        name: nid
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: 某个分类下所有公告
+      tags:
+      - 公告
+  /order/commit:
+    post:
+      consumes:
+      - application/json
+      description: 购买首发订单创建
+      parameters:
+      - description: 查询参数
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.OrderForm'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 购买首发订单创建
+      tags:
+      - 二期接口列表
+  /order/list/{typ}:
+    get:
+      consumes:
+      - application/json
+      description: 'typ 0: "全部"，,1: "进行中", 2: "已完成", 3: "已取消"'
+      parameters:
+      - description: 订单类型
+        in: path
+        name: typ
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 订单记录
+      tags:
+      - 支付相关
+  /product/detail/{id}:
+    get:
+      consumes:
+      - application/json
+      description: 首发作品详情
+      parameters:
+      - description: 首发作品id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 首发作品详情
+      tags:
+      - 首发作品
+  /product/list:
+    get:
+      consumes:
+      - application/json
+      description: 首发作品列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 首发作品列表
+      tags:
+      - 首发作品
+  /storage/avatarUpload:
+    post:
+      consumes:
+      - application/json
+      description: 上传个人图像
+      parameters:
+      - description: 文件
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 上传个人图像
+      tags:
+      - 用户
+  /wallet/create:
+    post:
+      consumes:
+      - application/json
+      description: 先查询用户是否已开通钱包,如果未开通调用此接口，否则调用钱包查询接口获取钱包链接。
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 汇付钱包开户
+      tags:
+      - 二期接口列表
+  /wallet/info:
+    get:
+      consumes:
+      - application/json
+      description: 汇付钱包查询
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      security:
+      - ApiKeyAuth: []
+      summary: 汇付钱包查询
+      tags:
+      - 二期接口列表
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

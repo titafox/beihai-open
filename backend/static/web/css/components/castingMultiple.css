@@ -1,0 +1,78 @@
+.upload__box {
+    position: relative;
+  }
+
+  .upload__input {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+  }
+
+
+  .upload__input:hover {
+    cursor: pointer;
+  }
+
+  .upload__box:hover .upload__select {
+    display: block;
+  }
+
+  .upload__select {
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    background-color: transparent;
+
+    z-index: 2;
+    display: none;
+  }
+
+  .upload__select_trangle {
+    position: relative;
+    background-color: #222227;
+    z-index: 3;
+    margin-top: 40px;
+    padding: 20px 0;
+    border-radius: 12px;
+  }
+
+  .upload__select li {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding-left: 20px;
+    user-select: none;
+	color: #CFCFCF;
+  }
+
+  .upload__select li:hover {
+    background-color: #110e0e;
+    cursor: pointer;
+  }
+
+
+  .upload__box::after {
+    content: '';
+    position: absolute;
+    right: 15%;
+    top: 13px;
+    width: 20px;
+    height: 20px;
+    background-image: url('img/trangle.svg');
+    background-size: cover;
+  }
+
+  .upload__select_trangle {
+    position: relative;
+  }
+
+  .upload__select_trangle::before {
+    position: absolute;
+    content: '';
+    border-left: 10px solid transparent;
+    border-bottom: 10px solid #222227;
+    right: 10%;
+    top: -5px;
+    transform: rotate(-135deg);
+  }

@@ -1,0 +1,60 @@
+.mint-denied .active {
+	padding: 120px 60px 70px;
+	display: flex;
+	align-items: center;
+}
+
+.mint-denied .col-12 {
+	text-align: center;
+}
+
+.mint-denied .row {
+	display: flex;
+	align-items: center;
+}
+
+.mint-denied h1 {
+	color: #FFFFFF;
+	text-align: left;
+}
+
+.mint-denied p {
+	color: #BDBDBD;
+	text-align: left;
+}
+
+.mint-denied a svg {
+	fill: #bdbdbd;
+	transition: fill .5s ease;
+}
+
+.mint-denied a:hover svg {
+	fill: #6164ff;
+}
+
+.mint-denied a:hover {
+	cursor: pointer;
+}
+
+
+.mint-denied a {
+	margin-left: 20px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 22px;
+	height: 22px;
+	position: relative;
+	transition: 0.5s ease;
+	transition-property: color, background-color, border-color, box-shadow;
+}
+
+.mint-denied .membership {
+	color: #FFFFFF;
+	font-weight: bolder;
+}
+
+.mint-denied .membership:hover{
+	cursor: pointer;
+}

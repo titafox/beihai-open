@@ -1,0 +1,50 @@
+// 颜色
+.m-color-m1{
+	color: #21005D;
+}
+.m-color-m2{
+	color: #888888;
+}
+.m-bg-m1{
+	background-color: #21005D;
+}
+.m-bg-m2{
+	background-color: #180240;
+	color:white;
+}
+
+.m-flex{
+	display: flex;
+	flex-wrap: nowrap;
+}
+
+.m-flex-w{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.m-flex-wsb{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.m-flex-c{
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: center;
+	justify-content: center;
+}
+
+.m-flex-cl{
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: center;
+	
+}
+
+.m-flex-sb{
+	display: flex;	
+	flex-wrap: nowrap;
+	justify-content: space-between;
+}
